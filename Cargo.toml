@@ -1,3 +1,3 @@
 [workspace]
-members = ["./dynamic_programming_2d/unique_path_rust"]
+members = ["dynamic_programming_2d/62_unique_path_rust"]
 resolver = "2"
