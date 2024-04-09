@@ -12,6 +12,9 @@ package palindromic_substring
 // formula: dp[i][j] = dp[i+1][j-1] && s[i] == s[j].
 // This means a substring s[i..j] is a palindrome if s[i] == s[j] and the
 // substring s[i+1..j-1] is also a palindrome.
+// Note that we need to check all substrings of length 3, 4, 5, ..., n.
+// Because we have the two-character substrings already covered then we can calculate the longer substrings.
+// 2->3->4->5->...->n
 
 // We keep track of the start and length (or end) of the longest palindromic substring found so far.
 // When we find a longer palindrome, we update these variables.

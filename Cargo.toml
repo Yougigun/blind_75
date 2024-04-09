@@ -1,3 +1,6 @@
 [workspace]
-members = ["dynamic_programming_2d/62_unique_path_rust"]
+members = [
+    "dynamic_programming_2d/5_longest_palindromic_substring_rust",
+    "dynamic_programming_2d/62_unique_path_rust",
+]
 resolver = "2"
