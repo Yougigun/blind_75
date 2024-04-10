@@ -3,6 +3,10 @@
 version = 3
 
 [[package]]
+name = "decode_ways"
+version = "0.1.0"
+
+[[package]]
 name = "longest_palindromic_substring"
 version = "0.1.0"
 
