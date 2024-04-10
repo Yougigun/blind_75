@@ -1,5 +1,7 @@
 #![allow(warnings)]
 
+use std::str::Bytes;
+
 struct Solution;
 impl Solution {
     // Initialize a 2D boolean array dp where dp[i][j] is true if the substring s[i..j]
@@ -41,10 +43,10 @@ impl Solution {
             dp[i][i] = true;
         }
         // turn string into bytes
-        let s_bytes = s.as_bytes();
+        let s_chars = s.chars().collect::<Vec<char>>();
         // check for two-character substrings
         for i in 0..(n - 1) {
-            if s_bytes[i] == s_bytes[i + 1] {
+            if s_chars[i] == s_chars[i + 1] {
                 dp[i][i + 1] = true;
                 start = i;
                 max_len = 2;
@@ -56,8 +58,8 @@ impl Solution {
             // start index and end index
             for i in 0..=n - len {
                 let j = i + len - 1;
-                let start_char = s_bytes[i];
-                let end_char = s_bytes[j];
+                let start_char = s_chars[i];
+                let end_char = s_chars[j];
                 if start_char == end_char && dp[i + 1][j - 1] {
                     dp[i][j] = true;
                     if len > max_len {
@@ -69,6 +71,55 @@ impl Solution {
         }
         return s[start..(start + max_len)].into();
     }
+
+    // loop based solution
+    pub fn longest_palindrome_loop(s: String) -> String {
+        let n = s.len();
+        if n == 0 {
+            return "".into();
+        } else if n == 1 {
+            return s;
+        };
+
+        let s_vec = s.as_bytes();
+
+        let mut start = 0;
+        let mut max_len = 1;
+        // check for add length substring, i is the center of the palindrome
+        for i in 0..n {
+            // check if it is palindrome
+            let (mut l, mut r) = (i, i);
+            while s_vec[l] == s_vec[r] {
+                if r - l + 1 > max_len {
+                    start = l;
+                    max_len = r - l + 1;
+                }
+                if l == 0 || r == n - 1 {
+                    break;
+                }
+                l -= 1;
+                r += 1;
+            }
+        }
+
+        // check for even length substring, i is the center of the palindrome
+        for i in 0..=(n - 2) {
+            let (mut l, mut r) = (i, i + 1);
+            while s_vec[l] == s_vec[r] {
+                if r - l + 1 > max_len {
+                    start = l;
+                    max_len = r - l + 1;
+                }
+                if l == 0 || r == n - 1 {
+                    break;
+                }
+                l -= 1;
+                r += 1;
+            }
+        }
+        return s[start..(start + max_len)].into();
+    }
+
 }
 
 #[cfg(test)]
@@ -92,5 +143,25 @@ mod tests {
         let s = "ac".to_string();
         let expected = "a".to_string();
         assert_eq!(Solution::longest_palindrome(s), expected);
+    }
+
+    // the test cases for the loop based solution
+    #[test]
+    fn test_longest_palindrome_loop() {
+        let s = "babad".to_string();
+        let expected = "bab".to_string();
+        assert_eq!(Solution::longest_palindrome_loop(s), expected);
+
+        let s = "cbbd".to_string();
+        let expected = "bb".to_string();
+        assert_eq!(Solution::longest_palindrome_loop(s), expected);
+
+        let s = "a".to_string();
+        let expected = "a".to_string();
+        assert_eq!(Solution::longest_palindrome_loop(s), expected);
+
+        let s = "ac".to_string();
+        let expected = "a".to_string();
+        assert_eq!(Solution::longest_palindrome_loop(s), expected);
     }
 }
