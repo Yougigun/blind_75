@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "dynamic_programming_1d/152_maximux_product_subarray_rust",
     "dynamic_programming_1d/91_decode_ways_rust",
     "dynamic_programming_2d/5_longest_palindromic_substring_rust",
     "dynamic_programming_2d/62_unique_path_rust",

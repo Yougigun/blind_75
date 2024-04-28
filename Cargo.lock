@@ -11,5 +11,9 @@ name = "longest_palindromic_substring"
 version = "0.1.0"
 
 [[package]]
+name = "maximum_product_subarray"
+version = "0.1.0"
+
+[[package]]
 name = "unique_path"
 version = "0.1.0"
